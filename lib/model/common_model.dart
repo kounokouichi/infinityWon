@@ -3,40 +3,50 @@ import 'package:sqflite/sqflite.dart';
 import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
 
 class CommonModel {
-  // TODO:このアプリ用にDBを反映する
-  static const String tableNameHouseHoldAccount = 'HOUSEHOLD_ACCOUNT';
-  static const String tableNameTag = 'TAG';
+  static const String tableNameTestInfo = 'TEST_INFO';
+  static const String tableNameTestAnswer = 'TEST_ANSWER';
+  static const String tableNameCorrectAnswer = 'CORRECT_ANSWER';
 
   static Future<void> _createTables(Database database) async {
     await database.execute("""
-        CREATE TABLE $tableNameHouseHoldAccount(
+        CREATE TABLE $tableNameTestInfo(
           id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-          date TEXT NOT NULL,
-          money INTEGER NOT NULL DEFAULT 0,
-          income_or_expend_flag TEXT NOT NULL DEFAULT '0',
-          tag_id INTEGER NOT NULL,
-          memo TEXT DEFAULT '',
-          stamp_id TEXT DEFAULT 0
+          // テスト名
+          name TEXT NOT NULL,
+          // テスト種別
+          type INTEGER NOT NULL DEFAULT 0,
+          // 問題数
+          question_count INTEGER NOT NULL DEFAULT 0,
+          // 受験回数
+          test_count INTEGER NOT NULL DEFAULT 0,
         )
       """);
     await database.execute("""
-        CREATE TABLE $tableNameTag(
+        CREATE TABLE $tableNameTestAnswer(
           id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-          name TEXT NOT NULL,
-          color TEXT,
-          sort INTEGER NOT NULL,
-          invisible INTEGER DEFAULT 0
+          // test_infoテーブルの主キー
+          test_id INTEGER DEFAULT 0,
+          // テスト回数
+          test_count INTEGER DEFAULT 0,
+          // 問題番号
+          question_number INTEGER DEFAULT 0,
+          // 解答番号
+          answer_number INTEGER DEFAULT 0,
+          // 解答時間
+          answer_time INTEGER DEFAULT 0,
         )
       """);
-    if (!kIsWeb) {
-      // webやと通ってくれない
-      await database.rawInsert(
-          'INSERT INTO tag(name, color, sort) VALUES("食費", null, 10)');
-      await database.rawInsert(
-          'INSERT INTO tag(name, color, sort) VALUES("雑費", null, 20)');
-      await database.rawInsert(
-          'INSERT INTO tag(name, color, sort) VALUES("外食費", null, 30)');
-    }
+    await database.execute("""
+        CREATE TABLE $tableNameCorrectAnswer(
+          id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+          // test_infoテーブルの主キー
+          test_id INTEGER DEFAULT 0,
+          // 問題番号
+          question_number INTEGER DEFAULT 0,
+          // 答案番号
+          answer_number INTEGER DEFAULT 0,
+        )
+      """);
   }
 
   static Future<Database> db() async {

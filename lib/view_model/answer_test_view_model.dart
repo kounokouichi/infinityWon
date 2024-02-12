@@ -4,10 +4,10 @@ import 'package:infinity_won/data/test_info.dart';
 import 'package:infinity_won/enum/test_type.dart';
 import 'package:infinity_won/model/test_info_model.dart';
 
-final createTestProvider = ChangeNotifierProvider.autoDispose(
-    ((ref) => CreateTestViewModel()));
+final answerTestProvider = ChangeNotifierProvider.autoDispose(
+    ((ref) => AnswerTestViewModel()));
 
-class CreateTestViewModel extends ChangeNotifier {
+class AnswerTestViewModel extends ChangeNotifier {
   DateTime selectedDay = DateTime.now();
   DateTime focusedDay = DateTime.now();
 
@@ -22,13 +22,11 @@ class CreateTestViewModel extends ChangeNotifier {
   Future registNewTest() async {
     if (testNameController.text.isEmpty) {
       // テスト名が未入力
-      // ref.read(messageProvider.notifier).state = Message.E0001;
       return;
     }
     if (questionCountController.text.isEmpty ||
       int.parse(questionCountController.text) <= 0) {
       // タグが未入力
-      // ref.read(messageProvider.notifier).state = Message.E0004;
       return;
     }
 
@@ -38,10 +36,7 @@ class CreateTestViewModel extends ChangeNotifier {
         testType,
         int.parse(questionCountController.text),
       );
-      // ref.read(messageProvider.notifier).state = Message.S0001;
-      // ref.read(isUpdatedProvider.notifier).state = true;
     } catch (e) {
-      // ref.read(messageProvider.notifier).state = Message.E0002;
     }
     notifyListeners();
     return;
