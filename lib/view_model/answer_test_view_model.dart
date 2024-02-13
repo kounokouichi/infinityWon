@@ -8,9 +8,6 @@ final answerTestProvider = ChangeNotifierProvider.autoDispose(
     ((ref) => AnswerTestViewModel()));
 
 class AnswerTestViewModel extends ChangeNotifier {
-  DateTime selectedDay = DateTime.now();
-  DateTime focusedDay = DateTime.now();
-
   List<TestInfo> allTestInfo = [];
   // テスト名
   TextEditingController testNameController = TextEditingController();

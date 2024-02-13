@@ -8,44 +8,50 @@ class CommonModel {
   static const String tableNameCorrectAnswer = 'CORRECT_ANSWER';
 
   static Future<void> _createTables(Database database) async {
+    /**
+     * テスト名
+     * テスト種別
+     * 問題数
+     * 受験回数
+     */
     await database.execute("""
         CREATE TABLE $tableNameTestInfo(
           id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-          // テスト名
           name TEXT NOT NULL,
-          // テスト種別
           type INTEGER NOT NULL DEFAULT 0,
-          // 問題数
           question_count INTEGER NOT NULL DEFAULT 0,
-          // 受験回数
-          test_count INTEGER NOT NULL DEFAULT 0,
-        )
+          test_count INTEGER NOT NULL DEFAULT 0
+        );
       """);
-    await database.execute("""
+      /**
+       * test_infoテーブルの主キー
+       * テスト回数
+       * 問題番号
+       * 解答番号
+       * 解答時間
+       */
+      await database.execute("""
         CREATE TABLE $tableNameTestAnswer(
           id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-          // test_infoテーブルの主キー
           test_id INTEGER DEFAULT 0,
-          // テスト回数
           test_count INTEGER DEFAULT 0,
-          // 問題番号
           question_number INTEGER DEFAULT 0,
-          // 解答番号
           answer_number INTEGER DEFAULT 0,
-          // 解答時間
-          answer_time INTEGER DEFAULT 0,
-        )
+          answer_time INTEGER DEFAULT 0
+        );
       """);
-    await database.execute("""
+      /**
+       * test_infoテーブルの主キー
+       * 問題番号
+       * 答案番号
+       */
+      await database.execute("""
         CREATE TABLE $tableNameCorrectAnswer(
           id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-          // test_infoテーブルの主キー
           test_id INTEGER DEFAULT 0,
-          // 問題番号
           question_number INTEGER DEFAULT 0,
-          // 答案番号
-          answer_number INTEGER DEFAULT 0,
-        )
+          answer_number INTEGER DEFAULT 0
+        );
       """);
   }
 

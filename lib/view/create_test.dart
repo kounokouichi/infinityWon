@@ -16,7 +16,7 @@ class _CreateTestState extends ConsumerState<CreateTest> {
   CreateTestViewModel get _vm => ref.watch(createTestProvider);
 
   final _pastTest = const [
-    DropdownMenuItem(value: 0, child: Text('')),
+    DropdownMenuItem(value: 0, child: Text('新規作成')),
   ];
 
   final _testTypeItems = [
@@ -28,6 +28,9 @@ class _CreateTestState extends ConsumerState<CreateTest> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      // TODO:消す
+      _vm.testNameController.text ='test';
+      _vm.questionCountController.text ='30';
       _vm.getAllTest().then((_) => {
             _vm.allTestInfo.forEach((testInfo) {
               _pastTest.add(DropdownMenuItem(
@@ -47,19 +50,16 @@ class _CreateTestState extends ConsumerState<CreateTest> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            Visibility(
-              visible: _pastTest.length > 1,
-              child: DropdownButtonFormField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: '過去問',
-                ),
-                // value: _value,
-                items: _pastTest,
-                onChanged: (value) {
-                  //   _value = value!;
-                },
+            DropdownButtonFormField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: '過去問',
               ),
+              // value: _value,
+              items: _pastTest,
+              onChanged: (value) {
+                //   _value = value!;
+              },
             ),
             const SizedBox(height: 8),
             TextFormField(
