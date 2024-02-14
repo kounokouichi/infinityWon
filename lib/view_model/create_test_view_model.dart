@@ -8,10 +8,11 @@ final createTestProvider = ChangeNotifierProvider.autoDispose(
     ((ref) => CreateTestViewModel()));
 
 class CreateTestViewModel extends ChangeNotifier {
-  List<TestInfo> allTestInfo = [];
+  List<TestInfo> allTestInfo = [const TestInfo(0,'新規作成',0,0,0)];
   // テスト名
   TextEditingController testNameController = TextEditingController();
   int testType = TestType.fourBase.value;
+  int pastValue = 0;
   // テストの問題数
   TextEditingController questionCountController = TextEditingController();
 
