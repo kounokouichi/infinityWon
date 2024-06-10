@@ -6,6 +6,7 @@ import 'package:infinity_won/router.dart' as rt;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:infinity_won/view_model/create_test_view_model.dart';
 
+/// テスト作成画面
 class CreateTest extends ConsumerStatefulWidget {
   const CreateTest({super.key});
 

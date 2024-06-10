@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:infinity_won/router.dart' as rt;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+/// ホーム画面
 class Home extends ConsumerStatefulWidget {
   const Home({super.key});
 
