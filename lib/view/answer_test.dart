@@ -1,28 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:infinity_won/router.dart' as rt;
+import 'package:infinity_won/view/component/answer_button_flut.dart';
 import 'package:infinity_won/view_model/answer_test_view_model.dart';
-
-class AnswerButtonFlut extends ConsumerWidget{
-  const AnswerButtonFlut({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return TextButton(
-        style: TextButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: const BorderRadius.all(Radius.circular(8)),
-            side: BorderSide(
-              width: 2,
-            ),
-          ),
-        ),
-        onPressed: () {},
-        child: const Text('TextButton #3'),
-      );
-  }
-  
-}
 
 /// 解答画面
 class AnswerTest extends ConsumerStatefulWidget {
@@ -55,13 +35,19 @@ class _AnswerTestState extends ConsumerState<AnswerTest> {
                 scrollDirection: Axis.horizontal,
                 itemCount: 5,
                 itemBuilder: (BuildContext context, int index) {
+                  int answerNumber = index +1;
                   return Card(
                     child: SizedBox(
                       width: MediaQuery.of(context).size.width - 20,
-                      child: Column(children: [
-                        Text("第$index問"),
-                         AnswerButtonFlut(),
-                      ],),
+                      child: Column(
+                        children: [
+                          Text("第$answerNumber問"),
+                          AnswerButtonFlut('1'),
+                          AnswerButtonFlut('2'),
+                          AnswerButtonFlut('3'),
+                          AnswerButtonFlut('4'),
+                        ],
+                      ),
                     ),
                   );
                 },
@@ -74,4 +60,3 @@ class _AnswerTestState extends ConsumerState<AnswerTest> {
     );
   }
 }
-
