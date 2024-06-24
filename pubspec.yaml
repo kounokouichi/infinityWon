@@ -21,6 +21,9 @@ dependencies:
   freezed_annotation: ^2.2.0
   build_runner: ^2.3.3
   cupertino_icons: ^1.0.2
+  carousel_slider: ^4.2.1
+  riverpod_generator: ^2.3.11
+  riverpod_annotation:
 
 dev_dependencies:
   flutter_test:

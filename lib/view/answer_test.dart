@@ -2,7 +2,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:infinity_won/router.dart' as rt;
 import 'package:infinity_won/view/component/answer_button_flut.dart';
+import 'package:infinity_won/view_model/answer.dart';
 import 'package:infinity_won/view_model/answer_test_view_model.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 /// 解答画面
 class AnswerTest extends ConsumerStatefulWidget {
@@ -14,6 +16,8 @@ class AnswerTest extends ConsumerStatefulWidget {
 
 class _AnswerTestState extends ConsumerState<AnswerTest> {
   AnswerTestViewModel get _vm => ref.watch(answerTestProvider);
+
+  final int answerCount = 4;
   @override
   void initState() {
     super.initState();
@@ -22,6 +26,8 @@ class _AnswerTestState extends ConsumerState<AnswerTest> {
 
   @override
   Widget build(BuildContext context) {
+  List<Answer> answer = ref.watch(answersProvider);
+// answer.description;
     return Scaffold(
       appBar: AppBar(title: Text("解答")),
       body: Padding(
@@ -31,26 +37,24 @@ class _AnswerTestState extends ConsumerState<AnswerTest> {
             //TODO:高さを調整できない！けどデザイン考えてない！
             SizedBox(
               height: 300,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 5,
-                itemBuilder: (BuildContext context, int index) {
-                  int answerNumber = index +1;
+              child: CarouselSlider.builder(
+                itemCount: 15,
+                itemBuilder: (BuildContext context, int itemIndex, _) {
+                  int answerNumber = itemIndex + 1;
                   return Card(
                     child: SizedBox(
                       width: MediaQuery.of(context).size.width - 20,
                       child: Column(
                         children: [
                           Text("第$answerNumber問"),
-                          AnswerButtonFlut('1'),
-                          AnswerButtonFlut('2'),
-                          AnswerButtonFlut('3'),
-                          AnswerButtonFlut('4'),
+                          for (var i = 1; i < answerCount + 1; i++)
+                            AnswerButtonFlut(i.toString()),
                         ],
                       ),
                     ),
                   );
                 },
+                options: CarouselOptions(height: 300),
               ),
             ),
             const SizedBox(height: 8),
