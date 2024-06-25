@@ -17,3 +17,8 @@ dart run sqflite_common_ffi_web:setup
 ```
 fvm flutter pub run build_runner build --delete-conflicting-outputs
 ```
+
+### riverpod_generator
+```
+dart run build_runner watch
+```

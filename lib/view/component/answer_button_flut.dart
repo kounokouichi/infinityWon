@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:infinity_won/view_model/answer.dart';
 
 class AnswerButtonFlut extends ConsumerWidget {
   const AnswerButtonFlut(
@@ -24,7 +25,11 @@ class AnswerButtonFlut extends ConsumerWidget {
             ),
           ),
         ),
-        onPressed: () {},
+        onPressed: () {
+
+  ref.watch(answersProvider.notifier).toggle('1');
+
+        },
         child: Text(number),
       ),
     );

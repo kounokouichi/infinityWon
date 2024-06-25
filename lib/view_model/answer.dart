@@ -53,17 +53,23 @@ class Answers extends _$Answers {
 
   // Let's mark a todo as completed
   void toggle(String todoId) {
-    state = [
-      for (final todo in state)
-        // we're marking only the matching todo as completed
-        if (todo.id == todoId)
-          // Once more, since our state is immutable, we need to make a copy
-          // of the todo. We're using our `copyWith` method implemented before
-          // to help with that.
-          todo.copyWith(completed: !todo.completed)
-        else
-          // other todos are not modified
-          todo,
-    ];
+    print('===');
+        state = state.map((item) {
+      if (item.id == todoId) return item.copyWith(completed: !item.completed);
+      return item;
+    }).toList();
+    print(state);
+    // state = [
+    //   for (final todo in state)
+    //     // we're marking only the matching todo as completed
+    //     if (todo.id == todoId)
+    //       // Once more, since our state is immutable, we need to make a copy
+    //       // of the todo. We're using our `copyWith` method implemented before
+    //       // to help with that.
+    //       todo.copyWith(completed: !todo.completed)
+    //     else
+    //       // other todos are not modified
+    //       todo,
+    // ];
   }
 }

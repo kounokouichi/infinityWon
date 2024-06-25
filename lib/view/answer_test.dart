@@ -27,6 +27,7 @@ class _AnswerTestState extends ConsumerState<AnswerTest> {
   @override
   Widget build(BuildContext context) {
   List<Answer> answer = ref.watch(answersProvider);
+  answer.add(Answer(completed: false,description: "",id: '1'));
 // answer.description;
     return Scaffold(
       appBar: AppBar(title: Text("解答")),
@@ -49,6 +50,7 @@ class _AnswerTestState extends ConsumerState<AnswerTest> {
                           Text("第$answerNumber問"),
                           for (var i = 1; i < answerCount + 1; i++)
                             AnswerButtonFlut(i.toString()),
+                          Text(answer[0].completed.toString()),
                         ],
                       ),
                     ),
