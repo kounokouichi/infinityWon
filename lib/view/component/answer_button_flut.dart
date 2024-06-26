@@ -4,33 +4,38 @@ import 'package:infinity_won/view_model/answer.dart';
 
 class AnswerButtonFlut extends ConsumerWidget {
   const AnswerButtonFlut(
-    this.number, {
+    this.questionNumber,
+    this.answerNumber, {
     super.key,
   });
-  final String number;
+  final int questionNumber;
+  final int answerNumber;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    var answers = ref.watch(answersProvider);
     return Container(
       padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
       width: 300,
       height: 52,
       child: TextButton(
         style: TextButton.styleFrom(
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(8)),
+          shape: RoundedRectangleBorder(
+            borderRadius: const BorderRadius.all(Radius.circular(8)),
             side: BorderSide(
-              color: Colors.blueAccent,
+              color: answerNumber == answers[questionNumber].answerNumber
+                  ? Colors.deepOrange
+                  : Colors.blueAccent,
               width: 2,
             ),
           ),
         ),
         onPressed: () {
-
-  ref.watch(answersProvider.notifier).toggle('1');
-
+          ref
+              .watch(answersProvider.notifier)
+              .toggle(questionNumber, answerNumber);
         },
-        child: Text(number),
+        child: Text("$answerNumber"),
       ),
     );
   }

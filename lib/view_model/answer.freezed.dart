@@ -16,9 +16,11 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Answer {
-  String get id => throw _privateConstructorUsedError;
-  String get description => throw _privateConstructorUsedError;
-  bool get completed => throw _privateConstructorUsedError;
+// 問題番号
+  int get number => throw _privateConstructorUsedError; // 解答番号
+  int get answerNumber => throw _privateConstructorUsedError; // 解答ステータス
+  int get status => throw _privateConstructorUsedError; // 解答時間
+  int get seconds => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AnswerCopyWith<Answer> get copyWith => throw _privateConstructorUsedError;
@@ -29,7 +31,7 @@ abstract class $AnswerCopyWith<$Res> {
   factory $AnswerCopyWith(Answer value, $Res Function(Answer) then) =
       _$AnswerCopyWithImpl<$Res, Answer>;
   @useResult
-  $Res call({String id, String description, bool completed});
+  $Res call({int number, int answerNumber, int status, int seconds});
 }
 
 /// @nodoc
@@ -45,23 +47,28 @@ class _$AnswerCopyWithImpl<$Res, $Val extends Answer>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? description = null,
-    Object? completed = null,
+    Object? number = null,
+    Object? answerNumber = null,
+    Object? status = null,
+    Object? seconds = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      completed: null == completed
-          ? _value.completed
-          : completed // ignore: cast_nullable_to_non_nullable
-              as bool,
+      number: null == number
+          ? _value.number
+          : number // ignore: cast_nullable_to_non_nullable
+              as int,
+      answerNumber: null == answerNumber
+          ? _value.answerNumber
+          : answerNumber // ignore: cast_nullable_to_non_nullable
+              as int,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as int,
+      seconds: null == seconds
+          ? _value.seconds
+          : seconds // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -73,7 +80,7 @@ abstract class _$$AnswerImplCopyWith<$Res> implements $AnswerCopyWith<$Res> {
       __$$AnswerImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String description, bool completed});
+  $Res call({int number, int answerNumber, int status, int seconds});
 }
 
 /// @nodoc
@@ -87,23 +94,28 @@ class __$$AnswerImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? description = null,
-    Object? completed = null,
+    Object? number = null,
+    Object? answerNumber = null,
+    Object? status = null,
+    Object? seconds = null,
   }) {
     return _then(_$AnswerImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      completed: null == completed
-          ? _value.completed
-          : completed // ignore: cast_nullable_to_non_nullable
-              as bool,
+      number: null == number
+          ? _value.number
+          : number // ignore: cast_nullable_to_non_nullable
+              as int,
+      answerNumber: null == answerNumber
+          ? _value.answerNumber
+          : answerNumber // ignore: cast_nullable_to_non_nullable
+              as int,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as int,
+      seconds: null == seconds
+          ? _value.seconds
+          : seconds // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -112,18 +124,27 @@ class __$$AnswerImplCopyWithImpl<$Res>
 
 class _$AnswerImpl implements _Answer {
   _$AnswerImpl(
-      {required this.id, required this.description, required this.completed});
+      {required this.number,
+      required this.answerNumber,
+      required this.status,
+      required this.seconds});
 
+// 問題番号
   @override
-  final String id;
+  final int number;
+// 解答番号
   @override
-  final String description;
+  final int answerNumber;
+// 解答ステータス
   @override
-  final bool completed;
+  final int status;
+// 解答時間
+  @override
+  final int seconds;
 
   @override
   String toString() {
-    return 'Answer(id: $id, description: $description, completed: $completed)';
+    return 'Answer(number: $number, answerNumber: $answerNumber, status: $status, seconds: $seconds)';
   }
 
   @override
@@ -131,15 +152,16 @@ class _$AnswerImpl implements _Answer {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AnswerImpl &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.description, description) ||
-                other.description == description) &&
-            (identical(other.completed, completed) ||
-                other.completed == completed));
+            (identical(other.number, number) || other.number == number) &&
+            (identical(other.answerNumber, answerNumber) ||
+                other.answerNumber == answerNumber) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.seconds, seconds) || other.seconds == seconds));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, description, completed);
+  int get hashCode =>
+      Object.hash(runtimeType, number, answerNumber, status, seconds);
 
   @JsonKey(ignore: true)
   @override
@@ -150,16 +172,19 @@ class _$AnswerImpl implements _Answer {
 
 abstract class _Answer implements Answer {
   factory _Answer(
-      {required final String id,
-      required final String description,
-      required final bool completed}) = _$AnswerImpl;
+      {required final int number,
+      required final int answerNumber,
+      required final int status,
+      required final int seconds}) = _$AnswerImpl;
 
-  @override
-  String get id;
-  @override
-  String get description;
-  @override
-  bool get completed;
+  @override // 問題番号
+  int get number;
+  @override // 解答番号
+  int get answerNumber;
+  @override // 解答ステータス
+  int get status;
+  @override // 解答時間
+  int get seconds;
   @override
   @JsonKey(ignore: true)
   _$$AnswerImplCopyWith<_$AnswerImpl> get copyWith =>

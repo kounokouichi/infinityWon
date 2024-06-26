@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:infinity_won/router.dart' as rt;
 import 'package:infinity_won/view/component/answer_button_flut.dart';
 import 'package:infinity_won/view_model/answer.dart';
-import 'package:infinity_won/view_model/answer_test_view_model.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 /// 解答画面
@@ -15,20 +14,18 @@ class AnswerTest extends ConsumerStatefulWidget {
 }
 
 class _AnswerTestState extends ConsumerState<AnswerTest> {
-  AnswerTestViewModel get _vm => ref.watch(answerTestProvider);
-
+  final int questionCount = 30;
   final int answerCount = 4;
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {});
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.watch(answersProvider.notifier).create(questionCount);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-  List<Answer> answer = ref.watch(answersProvider);
-  answer.add(Answer(completed: false,description: "",id: '1'));
-// answer.description;
     return Scaffold(
       appBar: AppBar(title: Text("解答")),
       body: Padding(
@@ -39,24 +36,40 @@ class _AnswerTestState extends ConsumerState<AnswerTest> {
             SizedBox(
               height: 300,
               child: CarouselSlider.builder(
-                itemCount: 15,
+                itemCount: questionCount + 1,
                 itemBuilder: (BuildContext context, int itemIndex, _) {
-                  int answerNumber = itemIndex + 1;
                   return Card(
                     child: SizedBox(
                       width: MediaQuery.of(context).size.width - 20,
-                      child: Column(
-                        children: [
-                          Text("第$answerNumber問"),
-                          for (var i = 1; i < answerCount + 1; i++)
-                            AnswerButtonFlut(i.toString()),
-                          Text(answer[0].completed.toString()),
-                        ],
-                      ),
+                      child: itemIndex != questionCount
+                          ? Column(
+                              children: [
+                                Text("第${itemIndex + 1}問"),
+                                for (var i = 1; i < answerCount + 1; i++)
+                                  AnswerButtonFlut(itemIndex, i),
+                              ],
+                            )
+                          : Column(
+                              children: [
+                                Container(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(8, 4, 8, 4),
+                                  width: 300,
+                                  height: 52,
+                                  child: TextButton(
+                                    onPressed: () {},
+                                    child: Text("答え合わせ画面へ"),
+                                  ),
+                                )
+                              ],
+                            ),
                     ),
                   );
                 },
-                options: CarouselOptions(height: 300),
+                options: CarouselOptions(
+                  height: 300,
+                  enableInfiniteScroll: false,
+                ),
               ),
             ),
             const SizedBox(height: 8),
