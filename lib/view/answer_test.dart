@@ -41,6 +41,7 @@ class _AnswerTestState extends ConsumerState<AnswerTest> {
                   return Card(
                     child: SizedBox(
                       width: MediaQuery.of(context).size.width - 20,
+                      // TODO:引数がリストにない時があって初生成時だけエラーが出ているかも
                       child: itemIndex != questionCount
                           ? Column(
                               children: [
@@ -51,16 +52,24 @@ class _AnswerTestState extends ConsumerState<AnswerTest> {
                             )
                           : Column(
                               children: [
-                                Container(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(8, 4, 8, 4),
-                                  width: 300,
-                                  height: 52,
-                                  child: TextButton(
-                                    onPressed: () {},
-                                    child: Text("答え合わせ画面へ"),
-                                  ),
-                                )
+                                TextButton(
+                                  onPressed: () {
+                                    // 答え合わせ画面へいく
+                                    Navigator.of(context)
+                                        .pushNamed(rt.Router.answerTest);
+                                  },
+                                  // TODO: 最終的には全部の答えを埋めたら答え合わせ画面に遷移できるボタンを常駐させたい
+                                  child: Text("答え合わせ画面へ"),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    // 答え合わせ画面へいく
+                                    Navigator.of(context)
+                                        .pushNamed(rt.Router.answerTest);
+                                  },
+                                  // TODO: 最終的には全部の答えを埋めたら答え合わせ画面に遷移できるボタンを常駐させたい
+                                  child: Text("答え合わせせずホーム画面へ"),
+                                ),
                               ],
                             ),
                     ),
