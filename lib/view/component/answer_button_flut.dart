@@ -5,11 +5,13 @@ import 'package:infinity_won/view_model/answer.dart';
 class AnswerButtonFlut extends ConsumerWidget {
   const AnswerButtonFlut(
     this.questionNumber,
-    this.answerNumber, {
+    this.answerNumber,
+    this.isCheck, {
     super.key,
   });
   final int questionNumber;
   final int answerNumber;
+  final bool isCheck;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -20,6 +22,7 @@ class AnswerButtonFlut extends ConsumerWidget {
       height: 52,
       child: TextButton(
         style: TextButton.styleFrom(
+          backgroundColor: isCheck ? Colors.grey : null,
           shape: RoundedRectangleBorder(
             borderRadius: const BorderRadius.all(Radius.circular(8)),
             side: BorderSide(

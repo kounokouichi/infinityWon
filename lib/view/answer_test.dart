@@ -47,7 +47,7 @@ class _AnswerTestState extends ConsumerState<AnswerTest> {
                               children: [
                                 Text("第${itemIndex + 1}問"),
                                 for (var i = 1; i < answerCount + 1; i++)
-                                  AnswerButtonFlut(itemIndex, i),
+                                  AnswerButtonFlut(itemIndex, i, false),
                               ],
                             )
                           : Column(
@@ -56,7 +56,7 @@ class _AnswerTestState extends ConsumerState<AnswerTest> {
                                   onPressed: () {
                                     // 答え合わせ画面へいく
                                     Navigator.of(context)
-                                        .pushNamed(rt.Router.answerTest);
+                                        .pushNamed(rt.Router.checkTest);
                                   },
                                   // TODO: 最終的には全部の答えを埋めたら答え合わせ画面に遷移できるボタンを常駐させたい
                                   child: Text("答え合わせ画面へ"),
@@ -65,7 +65,7 @@ class _AnswerTestState extends ConsumerState<AnswerTest> {
                                   onPressed: () {
                                     // 答え合わせ画面へいく
                                     Navigator.of(context)
-                                        .pushNamed(rt.Router.answerTest);
+                                        .pushNamed(rt.Router.home);
                                   },
                                   // TODO: 最終的には全部の答えを埋めたら答え合わせ画面に遷移できるボタンを常駐させたい
                                   child: Text("答え合わせせずホーム画面へ"),
