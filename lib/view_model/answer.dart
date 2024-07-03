@@ -18,6 +18,8 @@ class Answer with _$Answer {
     required int status,
     // 解答時間
     required int seconds,
+    // 正解番号
+    required int correctNumber,
   }) = _Answer;
 }
 
@@ -35,6 +37,7 @@ class Answers extends _$Answers {
         Answer(
           number: i,
           answerNumber: 0,
+          correctNumber: 0,
           status: 0,
           seconds: 0,
         )
@@ -42,12 +45,24 @@ class Answers extends _$Answers {
     }
   }
 
-  void toggle(int number, int answerNumber) {
+  void setAnswer(int number, int answerNumber) {
     state = [
       for (final answer in state)
         if (answer.number == number)
           answer.copyWith(
             answerNumber: answerNumber,
+            status: 1,
+          )
+        else
+          answer,
+    ];
+  }
+  void setCorrectAnswer(int number, int correctNumber) {
+    state = [
+      for (final answer in state)
+        if (answer.number == number)
+          answer.copyWith(
+            correctNumber: correctNumber,
             status: 1,
           )
         else

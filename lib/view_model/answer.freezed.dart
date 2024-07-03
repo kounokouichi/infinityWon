@@ -20,7 +20,8 @@ mixin _$Answer {
   int get number => throw _privateConstructorUsedError; // 解答番号
   int get answerNumber => throw _privateConstructorUsedError; // 解答ステータス
   int get status => throw _privateConstructorUsedError; // 解答時間
-  int get seconds => throw _privateConstructorUsedError;
+  int get seconds => throw _privateConstructorUsedError; // 正解番号
+  int get correctNumber => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AnswerCopyWith<Answer> get copyWith => throw _privateConstructorUsedError;
@@ -31,7 +32,12 @@ abstract class $AnswerCopyWith<$Res> {
   factory $AnswerCopyWith(Answer value, $Res Function(Answer) then) =
       _$AnswerCopyWithImpl<$Res, Answer>;
   @useResult
-  $Res call({int number, int answerNumber, int status, int seconds});
+  $Res call(
+      {int number,
+      int answerNumber,
+      int status,
+      int seconds,
+      int correctNumber});
 }
 
 /// @nodoc
@@ -51,6 +57,7 @@ class _$AnswerCopyWithImpl<$Res, $Val extends Answer>
     Object? answerNumber = null,
     Object? status = null,
     Object? seconds = null,
+    Object? correctNumber = null,
   }) {
     return _then(_value.copyWith(
       number: null == number
@@ -69,6 +76,10 @@ class _$AnswerCopyWithImpl<$Res, $Val extends Answer>
           ? _value.seconds
           : seconds // ignore: cast_nullable_to_non_nullable
               as int,
+      correctNumber: null == correctNumber
+          ? _value.correctNumber
+          : correctNumber // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -80,7 +91,12 @@ abstract class _$$AnswerImplCopyWith<$Res> implements $AnswerCopyWith<$Res> {
       __$$AnswerImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int number, int answerNumber, int status, int seconds});
+  $Res call(
+      {int number,
+      int answerNumber,
+      int status,
+      int seconds,
+      int correctNumber});
 }
 
 /// @nodoc
@@ -98,6 +114,7 @@ class __$$AnswerImplCopyWithImpl<$Res>
     Object? answerNumber = null,
     Object? status = null,
     Object? seconds = null,
+    Object? correctNumber = null,
   }) {
     return _then(_$AnswerImpl(
       number: null == number
@@ -116,6 +133,10 @@ class __$$AnswerImplCopyWithImpl<$Res>
           ? _value.seconds
           : seconds // ignore: cast_nullable_to_non_nullable
               as int,
+      correctNumber: null == correctNumber
+          ? _value.correctNumber
+          : correctNumber // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -127,7 +148,8 @@ class _$AnswerImpl implements _Answer {
       {required this.number,
       required this.answerNumber,
       required this.status,
-      required this.seconds});
+      required this.seconds,
+      required this.correctNumber});
 
 // 問題番号
   @override
@@ -141,10 +163,13 @@ class _$AnswerImpl implements _Answer {
 // 解答時間
   @override
   final int seconds;
+// 正解番号
+  @override
+  final int correctNumber;
 
   @override
   String toString() {
-    return 'Answer(number: $number, answerNumber: $answerNumber, status: $status, seconds: $seconds)';
+    return 'Answer(number: $number, answerNumber: $answerNumber, status: $status, seconds: $seconds, correctNumber: $correctNumber)';
   }
 
   @override
@@ -156,12 +181,14 @@ class _$AnswerImpl implements _Answer {
             (identical(other.answerNumber, answerNumber) ||
                 other.answerNumber == answerNumber) &&
             (identical(other.status, status) || other.status == status) &&
-            (identical(other.seconds, seconds) || other.seconds == seconds));
+            (identical(other.seconds, seconds) || other.seconds == seconds) &&
+            (identical(other.correctNumber, correctNumber) ||
+                other.correctNumber == correctNumber));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, number, answerNumber, status, seconds);
+  int get hashCode => Object.hash(
+      runtimeType, number, answerNumber, status, seconds, correctNumber);
 
   @JsonKey(ignore: true)
   @override
@@ -175,7 +202,8 @@ abstract class _Answer implements Answer {
       {required final int number,
       required final int answerNumber,
       required final int status,
-      required final int seconds}) = _$AnswerImpl;
+      required final int seconds,
+      required final int correctNumber}) = _$AnswerImpl;
 
   @override // 問題番号
   int get number;
@@ -185,6 +213,8 @@ abstract class _Answer implements Answer {
   int get status;
   @override // 解答時間
   int get seconds;
+  @override // 正解番号
+  int get correctNumber;
   @override
   @JsonKey(ignore: true)
   _$$AnswerImplCopyWith<_$AnswerImpl> get copyWith =>

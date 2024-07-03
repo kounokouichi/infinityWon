@@ -2,15 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:infinity_won/view_model/answer.dart';
 
+// 答え合わせ画面と解答画面は同じウィジェットを使う
 class AnswerButtonFlut extends ConsumerWidget {
   const AnswerButtonFlut(
     this.questionNumber,
-    this.answerNumber,
+    this.number,
     this.isCheck, {
     super.key,
   });
+  // 問題番号
   final int questionNumber;
-  final int answerNumber;
+  // 解答/正解番号
+  final int number;
+  // 答え合わせの時true
   final bool isCheck;
 
   @override
@@ -22,23 +26,37 @@ class AnswerButtonFlut extends ConsumerWidget {
       height: 52,
       child: TextButton(
         style: TextButton.styleFrom(
-          backgroundColor: isCheck ? Colors.grey : null,
+          backgroundColor: number == answers[questionNumber].answerNumber
+              ? Colors.green
+              : Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: const BorderRadius.all(Radius.circular(8)),
             side: BorderSide(
-              color: answerNumber == answers[questionNumber].answerNumber
-                  ? Colors.deepOrange
-                  : Colors.blueAccent,
+              color: !isCheck
+                  ? Colors.grey
+                  : (number == answers[questionNumber].correctNumber)
+                      ? (number == answers[questionNumber].answerNumber)
+                          ? Colors.blue
+                          : Colors.red
+                      : Colors.grey,
               width: 2,
             ),
           ),
         ),
         onPressed: () {
-          ref
-              .watch(answersProvider.notifier)
-              .toggle(questionNumber, answerNumber);
+          if (isCheck) {
+            // 答え合わせの時
+            ref
+                .watch(answersProvider.notifier)
+                .setCorrectAnswer(questionNumber, number);
+          } else {
+            // 問題解答時
+            ref
+                .watch(answersProvider.notifier)
+                .setAnswer(questionNumber, number);
+          }
         },
-        child: Text("$answerNumber"),
+        child: Text("$number"),
       ),
     );
   }

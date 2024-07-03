@@ -14,7 +14,7 @@ class CheckTest extends ConsumerStatefulWidget {
 }
 
 class _CheckTestState extends ConsumerState<CheckTest> {
-  final int questionCount = 30;
+  final int questionCount = 5;
   final int answerCount = 4;
   @override
   void initState() {
