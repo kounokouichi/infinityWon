@@ -44,6 +44,7 @@ class _AnswerTestState extends ConsumerState<AnswerTest> {
                       // TODO:引数がリストにない時があって初生成時だけエラーが出ているかも
                       child: itemIndex != questionCount
                           ? Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text("第${itemIndex + 1}問"),
                                 for (var i = 1; i < answerCount + 1; i++)
@@ -51,6 +52,7 @@ class _AnswerTestState extends ConsumerState<AnswerTest> {
                               ],
                             )
                           : Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 TextButton(
                                   onPressed: () {

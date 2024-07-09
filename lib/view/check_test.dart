@@ -5,7 +5,7 @@ import 'package:infinity_won/view/component/answer_button_flut.dart';
 import 'package:infinity_won/view_model/answer.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-/// 解答画面
+/// 答え合わせ画面
 class CheckTest extends ConsumerStatefulWidget {
   const CheckTest({super.key});
 
@@ -39,19 +39,22 @@ class _CheckTestState extends ConsumerState<CheckTest> {
                 itemCount: questionCount + 1,
                 itemBuilder: (BuildContext context, int itemIndex, _) {
                   return Card(
+                    color: Colors.purple[100],
                     child: SizedBox(
                       width: MediaQuery.of(context).size.width - 20,
                       // TODO:引数がリストにない時があって初生成時だけエラーが出ているかも
                       child: itemIndex != questionCount
                           ? Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text("第${itemIndex + 1}問"),
                                 for (var i = 1; i < answerCount + 1; i++)
-                                // フラグを持たせてボタンのレイアウトを答え合わせにも対応させないと
+                                  // フラグを持たせてボタンのレイアウトを答え合わせにも対応させないと
                                   AnswerButtonFlut(itemIndex, i, true),
                               ],
                             )
                           : Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 TextButton(
                                   onPressed: () {
@@ -59,9 +62,16 @@ class _CheckTestState extends ConsumerState<CheckTest> {
                                     Navigator.of(context)
                                         .pushNamed(rt.Router.checkTest);
                                   },
-                                  // TODO: 最終的には全部の答えを埋めたら答え合わせ画面に遷移できるボタンを常駐させたい
-                                  child: Text("答え合わせ画面へ"),
-                                )
+                                  child: Text("正誤確認画面"),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    // 答え合わせ画面へいく
+                                    Navigator.of(context)
+                                        .pushNamed(rt.Router.home);
+                                  },
+                                  child: Text("ホーム画面"),
+                                ),
                               ],
                             ),
                     ),
