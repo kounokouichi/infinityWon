@@ -23,17 +23,68 @@ class _ConfirmTestState extends ConsumerState<ConfirmTest> {
     });
   }
 
+// 横は「第何回、正解回数、正解率」、縦は「問題番号、合計正解回数」
 // 基本的にやることは解答画面と同じ
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("正誤確認")),
-      body: Padding(
+      body: Container(
+        color: Colors.amber,
         padding: const EdgeInsets.all(8.0),
-        child: Column(
+        child: ListView(
           children: [
-            // 横は「第何回、正解回数、正解率」、縦は「問題番号、合計正解回数」
-            const SizedBox(height: 8),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: DataTable(
+                columns: const [
+                  DataColumn(label: Text('問題番号')),
+                  DataColumn(label: Text('第1回')),
+                  DataColumn(label: Text('第2回')),
+                  DataColumn(label: Text('第3回')),
+                  DataColumn(label: Text('第4回')),
+                  DataColumn(label: Text('第5回')),
+                  DataColumn(label: Text('第6回')),
+                  DataColumn(label: Text('正解回数')),
+                  DataColumn(label: Text('正解率')),
+                ],
+                rows: const [
+                  DataRow(cells: [
+                    DataCell(Text('1')),
+                    DataCell(Text('2')),
+                    DataCell(Text('2')),
+                    DataCell(Text('2')),
+                    DataCell(Text('2')),
+                    DataCell(Text('2')),
+                    DataCell(Text('2')),
+                    DataCell(Text('6')),
+                    DataCell(Text('100%')),
+                  ]),
+                  DataRow(cells: [
+                    DataCell(Text('2')),
+                    DataCell(Text('3')),
+                    DataCell(Text('3')),
+                    DataCell(Text('3')),
+                    DataCell(Text('3')),
+                    DataCell(Text('3')),
+                    DataCell(Text('3')),
+                    DataCell(Text('6')),
+                    DataCell(Text('100%')),
+                  ]),
+                  DataRow(cells: [
+                    DataCell(Text('合計正解回数')),
+                    DataCell(Text('2')),
+                    DataCell(Text('2')),
+                    DataCell(Text('2')),
+                    DataCell(Text('2')),
+                    DataCell(Text('2')),
+                    DataCell(Text('2')),
+                    DataCell(Text('-')),
+                    DataCell(Text('100%')),
+                  ]),
+                ],
+              ),
+            ),
           ],
         ),
       ),

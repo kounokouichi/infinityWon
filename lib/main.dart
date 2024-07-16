@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:infinity_won/view/answer_test.dart';
 import 'package:infinity_won/view/check_test.dart';
+import 'package:infinity_won/view/confirm_test.dart';
 import 'package:infinity_won/view/create_test.dart';
 import 'package:infinity_won/view/home.dart';
 import 'router.dart' as rt;
@@ -31,7 +32,7 @@ class MyApp extends ConsumerWidget {
         rt.Router.createTest: (context) => const CreateTest(),
         rt.Router.answerTest: (context) => const AnswerTest(),
         rt.Router.checkTest: (context) => const CheckTest(),
-        rt.Router.confirmTest: (context) => const Home(),
+        rt.Router.confirmTest: (context) => const ConfirmTest(),
         rt.Router.settings: (context) => const Home(),
       },
         localizationsDelegates: [

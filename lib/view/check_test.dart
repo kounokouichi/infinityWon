@@ -60,7 +60,7 @@ class _CheckTestState extends ConsumerState<CheckTest> {
                                   onPressed: () {
                                     // 答え合わせ画面へいく
                                     Navigator.of(context)
-                                        .pushNamed(rt.Router.checkTest);
+                                        .pushNamed(rt.Router.confirmTest);
                                   },
                                   child: Text("正誤確認画面"),
                                 ),
@@ -68,7 +68,7 @@ class _CheckTestState extends ConsumerState<CheckTest> {
                                   onPressed: () {
                                     // 答え合わせ画面へいく
                                     Navigator.of(context)
-                                        .pushNamed(rt.Router.home);
+                                        .pushReplacementNamed(rt.Router.home);
                                   },
                                   child: Text("ホーム画面"),
                                 ),
