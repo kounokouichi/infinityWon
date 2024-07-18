@@ -19,7 +19,7 @@ class _ConfirmTestState extends ConsumerState<ConfirmTest> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // TODO: 他の2画面でもそうだが、この作り方で良いのか？
       // autoDisposeをうまく使って画面遷移するときは捨てずに行きたいね
-      ref.watch(answersProvider.notifier).create(questionCount);
+     
     });
   }
 
@@ -27,6 +27,8 @@ class _ConfirmTestState extends ConsumerState<ConfirmTest> {
 // 基本的にやることは解答画面と同じ
   @override
   Widget build(BuildContext context) {
+    // TODO:一旦providerから取得しているが本当は全部の解答を取得したい
+    final notifier =  ref.watch(answersProvider.notifier);
     return Scaffold(
       appBar: AppBar(title: const Text("正誤確認")),
       body: Container(
@@ -49,39 +51,45 @@ class _ConfirmTestState extends ConsumerState<ConfirmTest> {
                   DataColumn(label: Text('正解率')),
                 ],
                 rows: const [
-                  DataRow(cells: [
-                    DataCell(Text('1')),
-                    DataCell(Text('2')),
-                    DataCell(Text('2')),
-                    DataCell(Text('2')),
-                    DataCell(Text('2')),
-                    DataCell(Text('2')),
-                    DataCell(Text('2')),
-                    DataCell(Text('6')),
-                    DataCell(Text('100%')),
-                  ]),
-                  DataRow(cells: [
-                    DataCell(Text('2')),
-                    DataCell(Text('3')),
-                    DataCell(Text('3')),
-                    DataCell(Text('3')),
-                    DataCell(Text('3')),
-                    DataCell(Text('3')),
-                    DataCell(Text('3')),
-                    DataCell(Text('6')),
-                    DataCell(Text('100%')),
-                  ]),
-                  DataRow(cells: [
-                    DataCell(Text('合計正解回数')),
-                    DataCell(Text('2')),
-                    DataCell(Text('2')),
-                    DataCell(Text('2')),
-                    DataCell(Text('2')),
-                    DataCell(Text('2')),
-                    DataCell(Text('2')),
-                    DataCell(Text('-')),
-                    DataCell(Text('100%')),
-                  ]),
+                  DataRow(
+                    cells: [
+                      DataCell(Text('1')),
+                      DataCell(Text('2')),
+                      DataCell(Text('2')),
+                      DataCell(Text('2')),
+                      DataCell(Text('2')),
+                      DataCell(Text('2')),
+                      DataCell(Text('2')),
+                      DataCell(Text('6')),
+                      DataCell(Text('100%')),
+                    ],
+                  ),
+                  DataRow(
+                    cells: [
+                      DataCell(Text('2')),
+                      DataCell(Text('3')),
+                      DataCell(Text('3')),
+                      DataCell(Text('3')),
+                      DataCell(Text('3')),
+                      DataCell(Text('3')),
+                      DataCell(Text('3')),
+                      DataCell(Text('6')),
+                      DataCell(Text('100%')),
+                    ],
+                  ),
+                  DataRow(
+                    cells: [
+                      DataCell(Text('合計正解回数')),
+                      DataCell(Text('2')),
+                      DataCell(Text('2')),
+                      DataCell(Text('2')),
+                      DataCell(Text('2')),
+                      DataCell(Text('2')),
+                      DataCell(Text('2')),
+                      DataCell(Text('-')),
+                      DataCell(Text('100%')),
+                    ],
+                  ),
                 ],
               ),
             ),

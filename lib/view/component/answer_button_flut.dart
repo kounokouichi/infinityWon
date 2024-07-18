@@ -20,6 +20,7 @@ class AnswerButtonFlut extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var answers = ref.watch(answersProvider);
+    var notifier = ref.watch(answersProvider.notifier);
     return Container(
       padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
       width: 300,
@@ -46,14 +47,10 @@ class AnswerButtonFlut extends ConsumerWidget {
         onPressed: () {
           if (isCheck) {
             // 答え合わせの時
-            ref
-                .watch(answersProvider.notifier)
-                .setCorrectAnswer(questionNumber, number);
+            notifier.setCorrectAnswer(questionNumber, number);
           } else {
             // 問題解答時
-            ref
-                .watch(answersProvider.notifier)
-                .setAnswer(questionNumber, number);
+            notifier.setAnswer(questionNumber, number);
           }
         },
         child: Text("$number"),
