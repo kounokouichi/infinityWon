@@ -21,6 +21,8 @@ class TestInfoModel {
       data,
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
+    print('tableNameTestInfo createItem');
+
     return id;
   }
 

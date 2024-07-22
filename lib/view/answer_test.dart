@@ -20,7 +20,8 @@ class _AnswerTestState extends ConsumerState<AnswerTest> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.watch(answersProvider.notifier).create(questionCount);
+      // TODO:選択した問題番号を保持できるようにする
+      ref.watch(answersProvider.notifier).create(1, 1, questionCount);
     });
   }
 
@@ -51,29 +52,8 @@ class _AnswerTestState extends ConsumerState<AnswerTest> {
                                   AnswerButtonFlut(itemIndex, i, false),
                               ],
                             )
-                          : Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                TextButton(
-                                  onPressed: () {
-                                    // 答え合わせ画面へいく
-                                    Navigator.of(context)
-                                        .pushNamed(rt.Router.checkTest);
-                                  },
-                                  // TODO: 最終的には全部の答えを埋めたら答え合わせ画面に遷移できるボタンを常駐させたい
-                                  child: Text("答え合わせ画面へ"),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    // 答え合わせ画面へいく
-                                    Navigator.of(context)
-                                        .pushNamed(rt.Router.home);
-                                  },
-                                  // TODO: 最終的には全部の答えを埋めたら答え合わせ画面に遷移できるボタンを常駐させたい
-                                  child: Text("答え合わせせずホーム画面へ"),
-                                ),
-                              ],
-                            ),
+                          // TODO:ここだけ別のクラスにしてもいいと思う
+                          : lastPage(),
                     ),
                   );
                 },
@@ -87,6 +67,36 @@ class _AnswerTestState extends ConsumerState<AnswerTest> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget lastPage() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        TextButton(
+          onPressed: () async {
+            await ref
+                .watch(answersProvider.notifier)
+                .registerAnswer()
+                .whenComplete(
+                    () => Navigator.of(context).pushNamed(rt.Router.checkTest));
+          },
+          // TODO: 最終的には全部の答えを埋めたら答え合わせ画面に遷移できるボタンを常駐させたい
+          child: Text("答え合わせ画面へ"),
+        ),
+        TextButton(
+          onPressed: () async {
+            await ref
+                .watch(answersProvider.notifier)
+                .registerAnswer()
+                .whenComplete(
+                    () => Navigator.of(context).pushNamed(rt.Router.home));
+          },
+          // TODO: 最終的には全部の答えを埋めたら答え合わせ画面に遷移できるボタンを常駐させたい
+          child: Text("答え合わせせずホーム画面へ"),
+        ),
+      ],
     );
   }
 }

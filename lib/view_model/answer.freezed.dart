@@ -16,11 +16,13 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Answer {
-// 問題番号
-  int get number => throw _privateConstructorUsedError; // 解答番号
-  int get answerNumber => throw _privateConstructorUsedError; // 解答ステータス
+// 問題ID
+  int get testId => throw _privateConstructorUsedError; // 問題回数(第一回、第二回...)
+  int get testCount => throw _privateConstructorUsedError; // 問題番号(1~問題数分)
+  int get questionNumber => throw _privateConstructorUsedError; // 解答番号(1~4)
+  int get answerNumber => throw _privateConstructorUsedError; // 解答ステータス(1,2,3)
   int get status => throw _privateConstructorUsedError; // 解答時間
-  int get seconds => throw _privateConstructorUsedError; // 正解番号
+  int get answerTime => throw _privateConstructorUsedError; // 正解番号
   int get correctNumber => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -33,10 +35,12 @@ abstract class $AnswerCopyWith<$Res> {
       _$AnswerCopyWithImpl<$Res, Answer>;
   @useResult
   $Res call(
-      {int number,
+      {int testId,
+      int testCount,
+      int questionNumber,
       int answerNumber,
       int status,
-      int seconds,
+      int answerTime,
       int correctNumber});
 }
 
@@ -53,16 +57,26 @@ class _$AnswerCopyWithImpl<$Res, $Val extends Answer>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? number = null,
+    Object? testId = null,
+    Object? testCount = null,
+    Object? questionNumber = null,
     Object? answerNumber = null,
     Object? status = null,
-    Object? seconds = null,
+    Object? answerTime = null,
     Object? correctNumber = null,
   }) {
     return _then(_value.copyWith(
-      number: null == number
-          ? _value.number
-          : number // ignore: cast_nullable_to_non_nullable
+      testId: null == testId
+          ? _value.testId
+          : testId // ignore: cast_nullable_to_non_nullable
+              as int,
+      testCount: null == testCount
+          ? _value.testCount
+          : testCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      questionNumber: null == questionNumber
+          ? _value.questionNumber
+          : questionNumber // ignore: cast_nullable_to_non_nullable
               as int,
       answerNumber: null == answerNumber
           ? _value.answerNumber
@@ -72,9 +86,9 @@ class _$AnswerCopyWithImpl<$Res, $Val extends Answer>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as int,
-      seconds: null == seconds
-          ? _value.seconds
-          : seconds // ignore: cast_nullable_to_non_nullable
+      answerTime: null == answerTime
+          ? _value.answerTime
+          : answerTime // ignore: cast_nullable_to_non_nullable
               as int,
       correctNumber: null == correctNumber
           ? _value.correctNumber
@@ -92,10 +106,12 @@ abstract class _$$AnswerImplCopyWith<$Res> implements $AnswerCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int number,
+      {int testId,
+      int testCount,
+      int questionNumber,
       int answerNumber,
       int status,
-      int seconds,
+      int answerTime,
       int correctNumber});
 }
 
@@ -110,16 +126,26 @@ class __$$AnswerImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? number = null,
+    Object? testId = null,
+    Object? testCount = null,
+    Object? questionNumber = null,
     Object? answerNumber = null,
     Object? status = null,
-    Object? seconds = null,
+    Object? answerTime = null,
     Object? correctNumber = null,
   }) {
     return _then(_$AnswerImpl(
-      number: null == number
-          ? _value.number
-          : number // ignore: cast_nullable_to_non_nullable
+      testId: null == testId
+          ? _value.testId
+          : testId // ignore: cast_nullable_to_non_nullable
+              as int,
+      testCount: null == testCount
+          ? _value.testCount
+          : testCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      questionNumber: null == questionNumber
+          ? _value.questionNumber
+          : questionNumber // ignore: cast_nullable_to_non_nullable
               as int,
       answerNumber: null == answerNumber
           ? _value.answerNumber
@@ -129,9 +155,9 @@ class __$$AnswerImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as int,
-      seconds: null == seconds
-          ? _value.seconds
-          : seconds // ignore: cast_nullable_to_non_nullable
+      answerTime: null == answerTime
+          ? _value.answerTime
+          : answerTime // ignore: cast_nullable_to_non_nullable
               as int,
       correctNumber: null == correctNumber
           ? _value.correctNumber
@@ -145,31 +171,39 @@ class __$$AnswerImplCopyWithImpl<$Res>
 
 class _$AnswerImpl implements _Answer {
   _$AnswerImpl(
-      {required this.number,
+      {required this.testId,
+      required this.testCount,
+      required this.questionNumber,
       required this.answerNumber,
       required this.status,
-      required this.seconds,
+      required this.answerTime,
       required this.correctNumber});
 
-// 問題番号
+// 問題ID
   @override
-  final int number;
-// 解答番号
+  final int testId;
+// 問題回数(第一回、第二回...)
+  @override
+  final int testCount;
+// 問題番号(1~問題数分)
+  @override
+  final int questionNumber;
+// 解答番号(1~4)
   @override
   final int answerNumber;
-// 解答ステータス
+// 解答ステータス(1,2,3)
   @override
   final int status;
 // 解答時間
   @override
-  final int seconds;
+  final int answerTime;
 // 正解番号
   @override
   final int correctNumber;
 
   @override
   String toString() {
-    return 'Answer(number: $number, answerNumber: $answerNumber, status: $status, seconds: $seconds, correctNumber: $correctNumber)';
+    return 'Answer(testId: $testId, testCount: $testCount, questionNumber: $questionNumber, answerNumber: $answerNumber, status: $status, answerTime: $answerTime, correctNumber: $correctNumber)';
   }
 
   @override
@@ -177,18 +211,23 @@ class _$AnswerImpl implements _Answer {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AnswerImpl &&
-            (identical(other.number, number) || other.number == number) &&
+            (identical(other.testId, testId) || other.testId == testId) &&
+            (identical(other.testCount, testCount) ||
+                other.testCount == testCount) &&
+            (identical(other.questionNumber, questionNumber) ||
+                other.questionNumber == questionNumber) &&
             (identical(other.answerNumber, answerNumber) ||
                 other.answerNumber == answerNumber) &&
             (identical(other.status, status) || other.status == status) &&
-            (identical(other.seconds, seconds) || other.seconds == seconds) &&
+            (identical(other.answerTime, answerTime) ||
+                other.answerTime == answerTime) &&
             (identical(other.correctNumber, correctNumber) ||
                 other.correctNumber == correctNumber));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, number, answerNumber, status, seconds, correctNumber);
+  int get hashCode => Object.hash(runtimeType, testId, testCount,
+      questionNumber, answerNumber, status, answerTime, correctNumber);
 
   @JsonKey(ignore: true)
   @override
@@ -199,20 +238,26 @@ class _$AnswerImpl implements _Answer {
 
 abstract class _Answer implements Answer {
   factory _Answer(
-      {required final int number,
+      {required final int testId,
+      required final int testCount,
+      required final int questionNumber,
       required final int answerNumber,
       required final int status,
-      required final int seconds,
+      required final int answerTime,
       required final int correctNumber}) = _$AnswerImpl;
 
-  @override // 問題番号
-  int get number;
-  @override // 解答番号
+  @override // 問題ID
+  int get testId;
+  @override // 問題回数(第一回、第二回...)
+  int get testCount;
+  @override // 問題番号(1~問題数分)
+  int get questionNumber;
+  @override // 解答番号(1~4)
   int get answerNumber;
-  @override // 解答ステータス
+  @override // 解答ステータス(1,2,3)
   int get status;
   @override // 解答時間
-  int get seconds;
+  int get answerTime;
   @override // 正解番号
   int get correctNumber;
   @override

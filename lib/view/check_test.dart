@@ -20,7 +20,8 @@ class _CheckTestState extends ConsumerState<CheckTest> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.watch(answersProvider.notifier).create(questionCount);
+      // TODO:選択した問題番号を保持できるようにする
+      ref.watch(answersProvider.notifier).create(1, 1, questionCount);
     });
   }
 

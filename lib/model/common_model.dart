@@ -28,6 +28,7 @@ class CommonModel {
        * テスト回数
        * 問題番号
        * 解答番号
+       * 状態（1:自信あり、2:あんまし、3:自信なし）
        * 解答時間
        */
       await database.execute("""
@@ -37,20 +38,21 @@ class CommonModel {
           test_count INTEGER DEFAULT 0,
           question_number INTEGER DEFAULT 0,
           answer_number INTEGER DEFAULT 0,
+          status INTEGER DEFAULT 0,
           answer_time INTEGER DEFAULT 0
         );
       """);
       /**
        * test_infoテーブルの主キー
        * 問題番号
-       * 答案番号
+       * 正解番号
        */
       await database.execute("""
         CREATE TABLE $tableNameCorrectAnswer(
           id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
           test_id INTEGER DEFAULT 0,
           question_number INTEGER DEFAULT 0,
-          answer_number INTEGER DEFAULT 0
+          correct_number INTEGER DEFAULT 0
         );
       """);
   }
